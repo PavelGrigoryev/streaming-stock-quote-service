@@ -49,12 +49,12 @@ public class QuoteGeneratorServiceImpl implements QuoteGeneratorService {
                     quote.setInstant(Instant.now());
                     return quote;
                 })
-                .log("com.pavel.streamingstockquotesservice.service.QuoteGeneratorService");
+                .log("com.pavel.QuoteGeneratorService");
     }
 
     private Quote updateQuote(Quote quote) {
         BigDecimal priceChange = quote.getPrice()
-                .multiply(new BigDecimal(0.05 * this.random.nextDouble()), this.mathContext);
+                .multiply(BigDecimal.valueOf(0.05 * this.random.nextDouble()), this.mathContext);
         return new Quote(quote.getTicker(), quote.getPrice().add(priceChange));
     }
 }

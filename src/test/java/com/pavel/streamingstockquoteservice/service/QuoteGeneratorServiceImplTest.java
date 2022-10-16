@@ -9,6 +9,8 @@ import java.time.Duration;
 import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class QuoteGeneratorServiceImplTest {
 
     QuoteGeneratorService service;
@@ -20,7 +22,7 @@ class QuoteGeneratorServiceImplTest {
 
     @Test
     void fetchQuoteStream() throws InterruptedException {
-        Flux<Quote> quotesFlux = service.fetchQuoteStream(Duration.ofMillis(100));
+        Flux<Quote> quotesFlux = service.fetchQuoteStream(Duration.ofMillis(100L));
 
         Consumer<Quote> quoteConsumer = System.out::println;
 
@@ -34,5 +36,7 @@ class QuoteGeneratorServiceImplTest {
                 .subscribe(quoteConsumer, throwableConsumer, done);
 
         countDownLatch.await();
+
+        assertThat(quotesFlux).isNotNull();
     }
 }

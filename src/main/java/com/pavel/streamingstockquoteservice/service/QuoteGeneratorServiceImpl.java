@@ -49,7 +49,7 @@ public class QuoteGeneratorServiceImpl implements QuoteGeneratorService {
                     quote.setInstant(Instant.now());
                     return quote;
                 })
-                .log("com.pavel.QuoteGeneratorService");
+                .log("QuoteGeneratorService");
     }
 
     private Quote updateQuote(Quote quote) {
